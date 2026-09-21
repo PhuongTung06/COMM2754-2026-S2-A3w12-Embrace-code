@@ -22,45 +22,45 @@ let warningAlpha = 0, warningLetters = [];
 let warningLines = ['STOP TAKING', 'THINGS FOR GRANTED'];
 
 function preload() {
-  logoImg = loadImage('/images/logo.png');
+  logoImg = loadImage('images/logo.png');
 
-  head = loadImage('/images/head.png');
-  head2 = loadImage('/images/head2.png');
-  left = loadImage('/images/left.png');
-  left2 = loadImage('/images/left2.png');
-  right = loadImage('/images/right.png');
-  right2 = loadImage('/images/right2.png');
+  head = loadImage('images/head.png');
+  head2 = loadImage('images/head2.png');
+  left = loadImage('images/left.png');
+  left2 = loadImage('images/left2.png');
+  right = loadImage('images/right.png');
+  right2 = loadImage('images/right2.png');
 
-  fishImgs.push(loadImage('/images/fish1.png'));
-  fishImgs.push(loadImage('/images/fish2.png'));
-  fishImgs.push(loadImage('/images/fish3.png'));
-  fish4 = loadImage('/images/fish4.png');
+  fishImgs.push(loadImage('images/fish1.png'));
+  fishImgs.push(loadImage('images/fish2.png'));
+  fishImgs.push(loadImage('images/fish3.png'));
+  fish4 = loadImage('images/fish4.png');
 
-  light = loadImage('/images/light.png');
-  light2 = loadImage('/images/light2.png');
-  mid = loadImage('/images/mid.png');
-  mid2 = loadImage('/images/mid2.png');
-  dark = loadImage('/images/dark.png');
-  dark2 = loadImage('/images/dark2.png');
+  light = loadImage('images/light.png');
+  light2 = loadImage('images/light2.png');
+  mid = loadImage('images/mid.png');
+  mid2 = loadImage('images/mid2.png');
+  dark = loadImage('images/dark.png');
+  dark2 = loadImage('images/dark2.png');
 
-  starImg = loadImage('/images/star.png');
-  starImg2 = loadImage('/images/star2.png');
-  coralImg = loadImage('/images/coral.png');
-  coralImg2 = loadImage('/images/coral2.png');
-  seaweedImg = loadImage('/images/seaweed.png');
-  seaweedImg2 = loadImage('/images/seaweed2.png');
+  starImg = loadImage('images/star.png');
+  starImg2 = loadImage('images/star2.png');
+  coralImg = loadImage('images/coral.png');
+  coralImg2 = loadImage('images/coral2.png');
+  seaweedImg = loadImage('images/seaweed.png');
+  seaweedImg2 = loadImage('images/seaweed2.png');
 
-  sparkImg = loadImage('/images/spark.png');
+  sparkImg = loadImage('images/spark.png');
 
-  ambient1 = loadSound('/sounds/clothes_hook.wav');
-  ambient2 = loadSound('/sounds/wind_chime.wav');
-  ambient3 = loadSound('/sounds/water_splash.wav');
-  ambient4 = loadSound('/sounds/water_drop.wav');
-  ambient5 = loadSound('/sounds/echo.wav');
+  ambient1 = loadSound('sounds/clothes_hook.wav');
+  ambient2 = loadSound('sounds/wind_chime.wav');
+  ambient3 = loadSound('sounds/water_splash.wav');
+  ambient4 = loadSound('sounds/water_drop.wav');
+  ambient5 = loadSound('sounds/echo.wav');
 
-  clickSound = loadSound('/sounds/glow.wav');
-  restoreSound = loadSound('/sounds/heal.wav');
-  popupSound = loadSound('/sounds/popup.wav');
+  clickSound = loadSound('sounds/glow.wav');
+  restoreSound = loadSound('sounds/heal.wav');
+  popupSound = loadSound('sounds/popup.wav');
 }
 
 function setup() {
