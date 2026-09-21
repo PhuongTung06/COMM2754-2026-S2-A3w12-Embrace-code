@@ -856,23 +856,98 @@ function mouseReleased() {
   sparks.push(createSpark());
   draggingSpark = null;
 }
-
 function touchStarted() {
   if (touches.length === 0) return false;
 
-  let tx = (touches[0].x - offsetX) / scaleFactor;
-  let ty = (touches[0].y - offsetY) / scaleFactor;
+  let tx = touches[0].x;
+  let ty = touches[0].y;
 
-  if (showInfo) return false;
+  // POPUP
+  if (showInfo) {
+    let popupW = min(850, width * 0.8);
+    let popupH = min(900, height * 0.95);
+    let popupX = width / 2 - popupW / 2;
+    let popupY = height / 2 - popupH / 2;
 
+    // CLOSE
+    let closeX = popupX + popupW - 30;
+    let closeY = popupY + 30;
+
+    if (dist(tx, ty, closeX, closeY) < 45) {
+      playPopupSound();
+      showInfo = false;
+
+      if (soundOn && !audioStarted) {
+        startAudio();
+      }
+
+      return false;
+    }
+
+    // TABS
+    let tabW = popupW * 0.42;
+    let tabH = 70;
+    let tabY = popupY + 35;
+    let leftTabX = popupX + 20;
+    let rightTabX = popupX + popupW - tabW - 20;
+
+    if (
+      tx >= leftTabX &&
+      tx <= leftTabX + tabW &&
+      ty >= tabY &&
+      ty <= tabY + tabH
+    ) {
+      playPopupSound();
+      activeTab = 0;
+      targetTab = 0;
+      return false;
+    }
+
+    if (
+      tx >= rightTabX &&
+      tx <= rightTabX + tabW &&
+      ty >= tabY &&
+      ty <= tabY + tabH
+    ) {
+      playPopupSound();
+      activeTab = 1;
+      targetTab = 1;
+      return false;
+    }
+
+    // SOUND BUTTON
+    let buttonW = constrain(popupW * 0.22, 120, 190);
+    let buttonH = constrain(popupH * 0.07, 42, 50);
+    let buttonX = popupX + 20;
+    let buttonY = popupY + popupH - buttonH - 20;
+
+    if (
+      tx >= buttonX &&
+      tx <= buttonX + buttonW &&
+      ty >= buttonY &&
+      ty <= buttonY + buttonH
+    ) {
+      playPopupSound();
+      toggleSound();
+      return false;
+    }
+
+    return false;
+  }
+
+  // START AUDIO
   if (soundOn && !audioStarted) {
     startAudio();
   }
 
+  // FIND SPARK
+  let mx = (tx - offsetX) / scaleFactor;
+  let my = (ty - offsetY) / scaleFactor;
+
   for (let i = sparks.length - 1; i >= 0; i--) {
     let s = sparks[i];
 
-    if (dist(tx, ty, s.x, s.y) < s.size * 0.7) {
+    if (dist(mx, my, s.x, s.y) < s.size * 0.7) {
       draggingSpark = s;
       return false;
     }
