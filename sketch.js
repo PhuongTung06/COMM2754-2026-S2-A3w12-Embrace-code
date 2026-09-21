@@ -885,6 +885,52 @@ function touchStarted() {
       return false;
     }
 
+    let tabW = popupW * 0.42;
+    let tabH = 70;
+    let tabY = popupY + 35;
+    let leftTabX = popupX + 20;
+    let rightTabX = popupX + popupW - tabW - 20;
+
+    if (
+      screenX >= leftTabX &&
+      screenX <= leftTabX + tabW &&
+      screenY >= tabY &&
+      screenY <= tabY + tabH
+    ) {
+      playPopupSound();
+      activeTab = 0;
+      targetTab = 0;
+      return false;
+    }
+
+    if (
+      screenX >= rightTabX &&
+      screenX <= rightTabX + tabW &&
+      screenY >= tabY &&
+      screenY <= tabY + tabH
+    ) {
+      playPopupSound();
+      activeTab = 1;
+      targetTab = 1;
+      return false;
+    }
+
+    let buttonW = constrain(popupW * 0.22, 120, 190);
+    let buttonH = constrain(popupH * 0.07, 42, 50);
+    let buttonX = popupX + 20;
+    let buttonY = popupY + popupH - buttonH - 20;
+
+    if (
+      screenX >= buttonX &&
+      screenX <= buttonX + buttonW &&
+      screenY >= buttonY &&
+      screenY <= buttonY + buttonH
+    ) {
+      playPopupSound();
+      toggleSound();
+      return false;
+    }
+
     return false;
   }
 
