@@ -859,31 +859,42 @@ function mouseReleased() {
 function touchStarted() {
   if (touches.length === 0) return false;
 
-  let tx = touches[0].x;
-  let ty = touches[0].y;
+  let screenX = touches[0].x;
+  let screenY = touches[0].y;
 
-  // POPUP
-  if (showInfo) {
-    let popupW = min(850, width * 0.8);
-    let popupH = min(900, height * 0.95);
-    let popupX = width / 2 - popupW / 2;
-    let popupY = height / 2 - popupH / 2;
+  let tx = (screenX - offsetX) / scaleFactor;
+  let ty = (screenY - offsetY) / scaleFactor;
 
-    // CLOSE
-    let closeX = popupX + popupW - 30;
-    let closeY = popupY + 30;
+  if (showInfo) return false;
 
-    if (dist(tx, ty, closeX, closeY) < 45) {
-      playPopupSound();
-      showInfo = false;
+  // LOGO
+  if (
+    screenX > width - 110 &&
+    screenX < width &&
+    screenY > 0 &&
+    screenY < 120
+  ) {
+    playPopupSound();
+    showInfo = true;
+    return false;
+  }
 
-      if (soundOn && !audioStarted) {
-        startAudio();
-      }
+  if (soundOn && !audioStarted) {
+    startAudio();
+  }
 
+  // FIND SPARK
+  for (let i = sparks.length - 1; i >= 0; i--) {
+    let s = sparks[i];
+
+    if (dist(tx, ty, s.x, s.y) < s.size * 0.7) {
+      draggingSpark = s;
       return false;
     }
+  }
 
+  return false;
+}
     // TABS
     let tabW = popupW * 0.42;
     let tabH = 70;
@@ -999,19 +1010,20 @@ function touchEnded() {
 function startAudio() {
   if (audioStarted || !soundOn) return;
 
-  userStartAudio().then(() => {
-    ambient1.setVolume(0.5);
-    ambient2.setVolume(1);
-    ambient3.setVolume(0.1);
-    ambient4.setVolume(0.1);
-    ambient5.setVolume(0.05);
-    clickSound.setVolume(0.5);
-    restoreSound.setVolume(0.2);
+  userStartAudio();
 
-    ambient1.loop();
-    ambient2.loop();
-    audioStarted = true;
-  });
+  ambient1.setVolume(0.5);
+  ambient2.setVolume(1);
+  ambient3.setVolume(0.1);
+  ambient4.setVolume(0.1);
+  ambient5.setVolume(0.05);
+  clickSound.setVolume(0.5);
+  restoreSound.setVolume(0.2);
+
+  ambient1.loop();
+  ambient2.loop();
+
+  audioStarted = true;
 }
 
 function toggleSound() {
