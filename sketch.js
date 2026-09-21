@@ -861,11 +861,32 @@ function touchStarted() {
 
   let screenX = touches[0].x;
   let screenY = touches[0].y;
-
   let tx = (screenX - offsetX) / scaleFactor;
   let ty = (screenY - offsetY) / scaleFactor;
 
-  if (showInfo) return false;
+  // POPUP
+  if (showInfo) {
+    let popupW = min(850, width * 0.8);
+    let popupH = min(900, height * 0.95);
+    let popupX = width / 2 - popupW / 2;
+    let popupY = height / 2 - popupH / 2;
+
+    let closeX = popupX + popupW - 30;
+    let closeY = popupY + 30;
+
+    if (dist(screenX, screenY, closeX, closeY) < 35) {
+      playPopupSound();
+      showInfo = false;
+
+      if (soundOn && !audioStarted) {
+        startAudio();
+      }
+
+      return false;
+    }
+
+    return false;
+  }
 
   // LOGO
   if (
